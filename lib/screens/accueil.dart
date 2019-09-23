@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:photo_search/screens/result.dart';
 
 class Accueil extends StatelessWidget {
-  TextEditingController _myController = TextEditingController();
+
+  final myController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         backgroundColor: Colors.blueGrey,
         title: Text(
           "Photo - app",
@@ -15,7 +17,7 @@ class Accueil extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: <Widget>[
             Container(
               margin: EdgeInsets.all(20.0),
@@ -30,7 +32,7 @@ class Accueil extends StatelessWidget {
                   height: 45.0,
                   margin: EdgeInsets.all(20.0),
                   child: TextField(
-                    controller: _myController,
+                    controller: myController,
                     decoration: InputDecoration(
                         hintText: "ex: dog",
                         labelText: "Recherche",
@@ -41,7 +43,7 @@ class Accueil extends StatelessWidget {
                   ),
                 ),
                 subtitle: Container(
-                  margin: EdgeInsets.all(20.0),
+                  margin: EdgeInsets.all(15.0),
                   height: 45.0,
                   width: 150.0,
                   child: Material(
@@ -53,12 +55,12 @@ class Accueil extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => MyResult(
-                                      search: _myController.text,
+                                      search: myController.text,
                                     )));
                       },
                       child: Center(
                         child: Text(
-                          "Continuer",
+                          "Rechercher",
                           style: TextStyle(
                               fontFamily: "Schyler", color: Colors.white),
                         ),

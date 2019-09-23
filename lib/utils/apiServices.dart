@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:photo_search/main.dart';
 
 class ApiServices {
   static Future<dynamic> _get(String url) async {
@@ -18,6 +17,6 @@ class ApiServices {
   }
 
   static Future<Map> getPicts(String name) async {
-    return _get('${Urls.URL_BASE}');
+    return _get("https://pixabay.com/api/?key=11484437-f1fcd5e2fc8022a6d746b7022&q=$name&image_type=photo&pretty=true");
   }
 }
