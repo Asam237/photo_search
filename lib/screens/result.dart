@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:photo_search/utils/apiServices.dart';
 
+import 'accueil.dart';
+
 class MyResult extends StatefulWidget {
   String search;
   MyResult({this.search});
@@ -21,18 +23,17 @@ class _MyResultState extends State<MyResult> {
       ),
     ),
       body: FutureBuilder(
-          future: ApiServices.getPicts(widget.search),
+          future: getPic(widget.search),
           builder: (context, snapshot) {
-            final data = snapshot.data;
-            if (data == null) {
+            if (snapshot.data == null) {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Text("Erreur provenant du serveur", style: TextStyle(color: Colors.red, fontFamily: "Schyler", fontSize: 20.0),),
+                child: Text("", style: TextStyle(color: Colors.red, fontFamily: "Schyler", fontSize: 20.0),),
               );
             } else {
               if(snapshot.hasData) {
                 return ListView.builder(
-                    itemCount: data.length,
+                    itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
                       return Container(
                         margin: EdgeInsets.all(12.0),
@@ -40,7 +41,7 @@ class _MyResultState extends State<MyResult> {
                           elevation: 3.0,
                           child: FadeInImage.assetNetwork(
                               placeholder: "images/loading.gif",
-                              image: "${data['hits'][index]['largeImageURL']}"),
+                              image: "${snapshot.data['hits'][index]['largeImageURL']}"),
                         ),
                       );
                     });

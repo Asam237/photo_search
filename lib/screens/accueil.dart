@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:photo_search/screens/result.dart';
 
 class Accueil extends StatelessWidget {
@@ -74,5 +77,14 @@ class Accueil extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+Future<Map> getPic(String url) async {
+  final reponse = await http.get("https://pixabay.com/api/?key=11484437-f1fcd5e2fc8022a6d746b7022&q=$url&image_type=photo&pretty=true");
+  if(reponse.statusCode == 200){
+    return json.decode(reponse.body);
+  } else {
+    return null;
   }
 }
